@@ -19,12 +19,11 @@ module.exports = function(grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('resize_crop', 'Make images a specific size without distorting the aspect ratio. Resizes as close as possible and crops the rest.', function() {
-    
+
     var done = this.async();
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      format: "png",
       gravity: "center",
       height: 0,
       width: 0
@@ -41,13 +40,17 @@ module.exports = function(grunt) {
       }
     };
 
-
     // Iterate over all specified image groups.
     this.files.forEach(function(f) {
 
       // Handle completion of group
       var filesProcessed = 0;
       var filesToProcess = 0;
+
+      // Make sure all dest folders exist
+      var splitIndex = f.dest.lastIndexOf('/');
+      var destFolder = f.dest.substr(0, splitIndex);
+      grunt.file.mkdir(destFolder);
 
       var checkFilesFinished = function(){
         filesProcessed++;
@@ -70,8 +73,6 @@ module.exports = function(grunt) {
 
       });
 
-
-
       // Resize-crop all valid images
       validFiles.forEach(function(filepath) {
 
@@ -81,10 +82,8 @@ module.exports = function(grunt) {
 
         var rcOptions = {
           src: filepath,
-          dest: f.dest + '/' + filename + '.' + options.format
+          dest: f.dest
         };
-
-
 
         // Adds local options onto the global options
         deepExtend(rcOptions, options);
