@@ -10,7 +10,8 @@ This plugin requires [Grunt](http://gruntjs.com/) `~0.4.4` -- [Learn to use Grun
 Install the plugin with this command:
 
 ```shell
-npm install grunt-resize-crop --save-dev
+brew install imagemagick
+npm install @aftership/grunt-resize-crop --save-dev
 ```
 
 Enable in your Gruntfile with:
