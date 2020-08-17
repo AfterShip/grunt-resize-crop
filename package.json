@@ -47,6 +47,6 @@
   ],
   "dependencies": {
     "resize-crop": "0.0.3",
-    "deep-extend": "~0.2.8"
+    "deep-extend": "~0.6.0"
   }
 }
